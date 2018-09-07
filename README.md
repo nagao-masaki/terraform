@@ -57,3 +57,62 @@ $ az storage account keys list --account-name oiradaichi
   }
 ]
 ```
+
+## Edit backend.tf
+```
+$ cat providers/azure/development/backend.tf
+# Azure Storage
+terraform {
+  backend "azurerm" {
+   storage_account_name = "oiradaichi"
+   container_name       = "oisix"
+   key                  = "oisix.terraform.tfstate"
+   access_key           = "XXXXXXXXXXXXXXXXXXXXXXXX"
+  }
+}
+```
+
+## Create ServicePrincepal
+```
+$ az ad app create --display-name "Terraform" --password "AAAAAAAA" --identifier-uris "https://www.oisix.com"
+{
+  .....
+  "acceptMappedClaims": null,
+  "addIns": [],
+  "appId": "BBBBBB-BBBBBB-BBBBBB-BBBBBB-BBBBBB",
+  .....
+  }
+  
+$ az ad sp create --id BBBBBB-BBBBBB-BBBBBB-BBBBBB-BBBBBB
+{
+  .....
+  "objectId": "CCCCCCC-CCCCCCC-CCCCCCC-CCCCCCC-CCCCCCC",
+  "objectType": "ServicePrincipal",
+  .....
+}
+
+$ az role assignment create --assignee CCCCCCC-CCCCCCC-CCCCCCC-CCCCCCC-CCCCCCC --role Contributor
+
+$ az account list
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "DDDDDDD-DDDDDDD-DDDDDDD-DDDDDDD-DDDDDDD",
+    "isDefault": true,
+    "name": "xxxxxxxxx",
+    "state": "Enabled",
+    "tenantId": "EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE",
+    "user": {
+      "name": "xxxxxx@outlook.com",
+      "type": "user"
+    }
+  }
+]
+```
+
+## Insert data into Vault
+```
+$ vault write secret/azure_provider client_id=BBBBBB-BBBBBB-BBBBBB-BBBBBB-BBBBBB client_secret=AAAAAAAA subscription_id=DDDDDDD-DDDDDDD-DDDDDDD-DDDDDDD-DDDDDDD tenant_id=EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE
+```
+
+```
