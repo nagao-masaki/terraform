@@ -40,5 +40,20 @@ Create Storage Account
 $ az storage account create --location "Japan East" --name "oiradaichi" --resource-group "terraformValueGroup" --sku "Standard_GRS"
 
 Create Storage Container
-az storage container create --account-name "oiradaichi" --name "oisix"
+$ az storage container create --account-name "oiradaichi" --name "oisix"
+
+Get Storage Key
+$ az storage account keys list --account-name oiradaichi
+[
+  {
+    "keyName": "key1",
+    "permissions": "Full",
+    "value": "XXXXXXXXXXXXXXXXXXXXXXXX"
+  },
+  {
+    "keyName": "key2",
+    "permissions": "Full",
+    "value": "YYYYYYYYYYYYYYYYYYYYYYY"
+  }
+]
 ```

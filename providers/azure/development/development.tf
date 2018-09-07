@@ -11,8 +11,3 @@ provider "azurerm" {
     client_secret   = "${data.vault_generic_secret.azure_provider.data["client_secret"]}"
     tenant_id       = "${data.vault_generic_secret.azure_provider.data["tenant_id"]}"
 }
-
-resource "azurerm_resource_group" "jtf2018" {
-    name     = "${var.resource_group_name}"
-    location = "${var.location}"
-}
