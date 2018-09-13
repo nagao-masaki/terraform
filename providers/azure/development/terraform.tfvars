@@ -1,8 +1,8 @@
 #---------------------------------
 # resource_group
 #---------------------------------
-resource_group_name = "oiradaichi"
-location            = "Central US"
+resource_group_name = "oisixAKSGroup"
+location            = "Japan East"
 
 #---------------------------------
 # k8s

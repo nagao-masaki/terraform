@@ -115,4 +115,9 @@ $ az account list
 $ vault write secret/azure_provider client_id=BBBBBB-BBBBBB-BBBBBB-BBBBBB-BBBBBB client_secret=AAAAAAAA subscription_id=DDDDDDD-DDDDDDD-DDDDDDD-DDDDDDD-DDDDDDD tenant_id=EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE-EEEEEEEEEE
 ```
 
+## Terraform Init
 ```
+$ cd terraform/providers/azure/development
+$ terraform init
+```
+
